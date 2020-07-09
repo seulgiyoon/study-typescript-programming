@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "lib": ["ES2015"],
+    "module": "commonjs",
+    "outDir": "dist",
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2015",
+  },
+  // TSC가 타입스크립트 파일을 찾을 디렉터리
+  "include": [
+    "src"
+  ]
+}
