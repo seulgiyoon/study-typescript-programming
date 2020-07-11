@@ -1,11 +1,17 @@
 {
   "compilerOptions": {
+    // TSC가 코드 실행 환경에서 이용할 수 있다고 가정하는 API - e.g. ES2015의 object.assign
     "lib": ["ES2015"],
+    // 컴파일할 대상 모듈 시스템
     "module": "commonjs",
+    // 생성된 자바스크립트 코드를 출력할 폴더
     "outDir": "dist",
+    // source map 파일 생성 여부
     "sourceMap": true,
+    // 가능한 엄격하게 검사하기
     "strict": true,
-    "target": "es2015",
+    // 컴파일할 자바스크립트 버전
+    "target": "es2015"
   },
   // TSC가 타입스크립트 파일을 찾을 디렉터리
   "include": [
