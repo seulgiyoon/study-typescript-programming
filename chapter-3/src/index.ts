@@ -29,3 +29,14 @@ let exampleObject: {
   [key: number]: boolean; // boolean 타입의 값을 가지는 number 타입의 키를 다수 포함할 수 있다.
 };
 exampleObject = { one: 4, 11: true };
+
+// p.36 타입 별칭
+type Age = number;
+const age: Age = 30;
+
+// p.38 '|' 연산자
+type apple = { seed: boolean; fruit: boolean };
+type ball = { round: boolean };
+type appleOrBall = apple | ball;
+// apple 타입, ball 타입 혹은 둘 다를 할당할 수 있다.
+const mixedThing: appleOrBall = { seed: false, fruit: true, round: false };
