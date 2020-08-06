@@ -40,3 +40,15 @@ type ball = { round: boolean };
 type appleOrBall = apple | ball;
 // apple 타입, ball 타입 혹은 둘 다를 할당할 수 있다.
 const mixedThing: appleOrBall = { seed: false, fruit: true, round: false };
+
+// p.42 튜플
+let tupleA: [string] = ['hello'];
+// let tupleAError: [string] = ['hello', 'world'];
+let tupleB: [number, ...string[]] = [2020, 'hello', 'world', 'hey', 'ho'];
+let tupleC: [number, boolean?] = [2020];
+let tupleD: [number, boolean?] = [2020, true];
+
+// p.43 읽기전용 배열
+let readonlyA: readonly number[] = [1, 2, 3];
+// readonlyA.push(4); // Property 'push' does not exist on type 'readonly number[]'.
+readonlyA.slice(-1);
