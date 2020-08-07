@@ -52,3 +52,18 @@ let tupleD: [number, boolean?] = [2020, true];
 let readonlyA: readonly number[] = [1, 2, 3];
 // readonlyA.push(4); // Property 'push' does not exist on type 'readonly number[]'.
 readonlyA.slice(-1);
+
+// p.47 열거형 enum
+// 타입스크립트가 값을 추론하는 경우
+const enum Fruit {
+  Apple, // Fruit.Apple = 0
+  Orange, // Fruit.Orange = 1
+  Banana, // Fruit.Banana = 2
+}
+
+const redFruit = Fruit.Apple;
+// const orangeFruit = Fruit[1]; // A const enum member can only be accessed using a string literal.
+
+// p.52 연습문제
+let f = [1, false]; // (number | boolean)[]
+let h = null; // any
