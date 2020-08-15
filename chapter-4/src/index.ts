@@ -35,3 +35,42 @@ times((n) => console.log(`${n}!`), 4);
 
 // times(callback, 4);
 // 인라인으로 제공하지 않을 시 타입스크립트는 타입을 추론할 수 없다.
+
+// p.73 오버로드된 함수
+type Reservation = string;
+// 오버로드된 함수 시그니쳐 두개를 선언
+type Reserve = {
+  (from: Date, to: Date, destination: string): Reservation;
+  (from: Date, destination: string): Reservation;
+};
+// Error: Type '(from: any, to: any, destination: any) => string' is not assignable to type 'Reserve'.
+// const reserveError: Reserve = (from, to, destination) => {
+//   return 'reserved';
+// };
+
+// 여러가지 방식으로 함수를 호출할 수 있을 땐, 구체적으로 함수의 호출 방법을 알린다.
+const reserveNoError: Reserve = (from: Date, toOrDestination: Date | string, destination?: string) => {
+  if (typeof toOrDestination === 'string') {
+    return '편도여행';
+  } else if (toOrDestination instanceof Date && destination !== undefined) {
+    return '왕복여행';
+  } else {
+    return '가상여행';
+  }
+};
+
+// p.76 타입을 구체적으로 명시하기
+function getMonth1(date: any) {
+  return date.getDate(); // 자동완성 기능을 사용하려면 타입스크립트에게 date가 날짜 객체임을 알려야한다.
+}
+
+// if문 등으로 타입을 알린 경우
+function getMonth2(date: any): number | undefined {
+  if (date instanceof Date) {
+    return date.getDate(); // 자동완성 기능이 작동한다.
+  }
+}
+// 매개변수의 타입을 명시한 경우
+function getMonth3(date: Date): number {
+  return date.getMonth(); // 자동완성 기능이 작동한다.
+}
