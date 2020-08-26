@@ -74,3 +74,18 @@ function getMonth2(date: any): number | undefined {
 function getMonth3(date: Date): number {
   return date.getMonth(); // 자동완성 기능이 작동한다.
 }
+
+// p.79 다형성 - 제네릭
+// const filter = (array, func) => {
+//   let result = [];
+//   for (let i = 0; i < array.length; i++) {
+//     if (func(array[i])) {
+//       result.push(array[i]);
+//     }
+//   }
+//   return result;
+// }
+
+type filter = {
+  <T>(array: T[], func: (item: T) => boolean): T[];
+};
