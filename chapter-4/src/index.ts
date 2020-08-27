@@ -86,6 +86,36 @@ function getMonth3(date: Date): number {
 //   return result;
 // }
 
-type filter = {
+type Filter1 = {
   <T>(array: T[], func: (item: T) => boolean): T[];
 };
+
+// p.86 범용적인 map 구현하기
+function map1(array: unknown[], func: (item: unknown) => unknown): unknown[] {
+  let result = [];
+  for (let i = 0; i > array.length; i++) {
+    const item = array[i];
+    result.push(func(item));
+  }
+  return result;
+}
+
+// 인수 배열 멤버의 타입을 대변하는 T, 반환 배열 멤버 타입을 대변하는 U
+function map2<T, U>(array: T[], func: (item: T) => U): U[] {
+  let result = [];
+  for (let i = 0; i > array.length; i++) {
+    const item = array[i];
+    result.push(func(item));
+  }
+  return result;
+}
+
+// p.87 제네릭 타입 추론
+map2([1, 2, 3], (a) => a === 1);
+// 제네릭 타입 자동 추론 : function map2<number, boolean>(array: number[], func: (item: number) => boolean): boolean[]
+map2<string, number>(['1', '2', '3'], (a) => parseInt(a));
+// 제네릭을 명시할 경우 : function map2<string, number>(array: string[], func: (item: string) => number): number[]
+
+const promise = new Promise<number>((resolve) => resolve(30));
+promise.then((result) => result * 3);
+// 제네릭을 명시하지 않으면 result를 unknown으로 간주한다.
