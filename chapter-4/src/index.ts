@@ -119,3 +119,30 @@ map2<string, number>(['1', '2', '3'], (a) => parseInt(a));
 const promise = new Promise<number>((resolve) => resolve(30));
 promise.then((result) => result * 3);
 // 제네릭을 명시하지 않으면 result를 unknown으로 간주한다.
+
+// p.92 한정된 다형성
+type TreeNode = {
+  value: string;
+};
+// LeafNode는 TreeNode를 포함한다
+type LeafNode = TreeNode & {
+  isLeaf: true;
+};
+// extends를 이용해서 T가 최소한 TreeNode임을 한정할 수 있다
+function mapTree1<T extends TreeNode>(node: T, func: (value: string) => string): T {
+  return {
+    ...node,
+    value: func(node.value),
+  };
+}
+// extends를 이용하지 않는 경우
+function mapTree2(node: TreeNode, func: (value: string) => string): TreeNode {
+  return {
+    ...node,
+    value: func(node.value),
+  };
+}
+
+const leafNode: LeafNode = { value: 'a', isLeaf: true };
+mapTree1(leafNode, (a) => a); // 자동으로 LeafNode타입을 추론한다 - function mapTree<LeafNode>(node: LeafNode, func: (value: string) => string): LeafNode
+mapTree2(leafNode, (a) => a); // 타입 정보가 날아가고 TreeNode로 인식한다 - function mapTree2(node: TreeNode, func: (value: string) => string): TreeNode
